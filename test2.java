@@ -19,6 +19,8 @@ public class test2 {
 
         // Initializing a Dictionary for encryption
         Dictionary encryptDict = new Hashtable();
+        HashMap<Character, Character> map = new HashMap<>(); 
+
 
         // choosing random numbers for key
         // int size = Z29.length;
@@ -55,7 +57,7 @@ public class test2 {
         // end of delete later
 
         for (int i = 0; i < Z29.length; i++) {
-            encryptDict.put(Z29[i], cipherArray[i]);
+            map.put(Z29[i], cipherArray[i]);
         }
 
         //delete later
@@ -79,7 +81,7 @@ public class test2 {
             // cipher_array.get(i) = encryptDict.get(c);
             // System.out.print(encryptDict.get(c)+", ");
             
-            cipher_arrayList.add(encryptDict.get(c));
+            cipher_arrayList.add(map.get(c));
             System.out.print(cipher_arrayList.get(i));
 
         }
@@ -93,15 +95,15 @@ public class test2 {
         System.out.print("plain text: ");
 
 
-        for(Entry<String, Integer> entry: encryptDict.entrySet()) {
+        // for(Entry<String, Integer> entry: encryptDict.entrySet()) {
 
-            // if give value is equal to value from entry
-            // print the corresponding key
-            if(entry.getValue() == value) {
-              System.out.println("The key for value " + value + " is " + entry.getKey());
-              break;
-            }
-          }
+        //     // if give value is equal to value from entry
+        //     // print the corresponding key
+        //     if(entry.getValue() == value) {
+        //       System.out.println("The key for value " + value + " is " + entry.getKey());
+        //       break;
+        //     }
+        //   }
 
 
 
