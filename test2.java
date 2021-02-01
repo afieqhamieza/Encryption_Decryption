@@ -11,16 +11,14 @@ public class test2 {
 
         // delete later
         // for (int i = 0; i < Z29.length; i++) {
-        //     System.out.print(Z29[i] + ", ");
+        // System.out.print(Z29[i] + ", ");
         // }
         // System.out.println();
         // end of delete later
-        
 
         // Initializing a Dictionary for encryption
-        Dictionary encryptDict = new Hashtable();
-        HashMap<Character, Character> map = new HashMap<>(); 
-
+        // Dictionary encryptDict = new Hashtable();
+        HashMap<Character, Character> encryptMap = new HashMap<>();
 
         // choosing random numbers for key
         // int size = Z29.length;
@@ -37,76 +35,106 @@ public class test2 {
         // randElement.add(list.remove(index));
         // }
 
-        List<Character> eList = new ArrayList<Character>();
+        List<Character> shuffleList = new ArrayList<Character>();
         for (char c : Z29) {
-            eList.add(c);
+            shuffleList.add(c);
         }
 
-        Collections.shuffle(eList);
+        Collections.shuffle(shuffleList);
 
-        char[] cipherArray = new char[eList.size()];
-        for (int i = 0; i < eList.size(); i++) {
-            cipherArray[i] = eList.get(i);
-        }
+        // char[] cipherArray = new char[shuffleList.size()];
+        // for (int i = 0; i < shuffleList.size(); i++) {
+        //     cipherArray[i] = shuffleList.get(i);
+        // }
 
         // delete later
         // for (int i = 0; i < cipherArray.length; i++) {
-        //     System.out.print(cipherArray[i] + ", ");
+        // System.out.print(cipherArray[i] + ", ");
         // }
         // System.out.println();
         // end of delete later
 
         for (int i = 0; i < Z29.length; i++) {
-            map.put(Z29[i], cipherArray[i]);
+            encryptMap.put(Z29[i], shuffleList.get(i));
         }
 
-        //delete later
+        // delete later
         // System.out.println("Value : " + encryptDict.get('k'));
-        //end of delete later
+        // end of delete later
 
+        String plain_txt = "I am studying Data Encryption";
+        plain_txt = plain_txt.toLowerCase();
 
-        String plain_txt= "I am studying Data Encryption";
-        char cipher_txt[];
-        ArrayList cipher_arrayList = new ArrayList();
+        // char cipher_txt[];
+        // ArrayList cipher_arrayList = new ArrayList();
+        List<Character> cipher_txt = new ArrayList<Character>();
 
         System.out.println("\n\nEncrypting...");
-        System.out.println("plain text: "+ plain_txt);
+        System.out.println("plain text: " + plain_txt);
         System.out.print("cipher text: ");
 
-
-        plain_txt = plain_txt.toLowerCase();
-        for (int i = 0; i < plain_txt.length(); i++){
-            char c = plain_txt.charAt(i);        
+        for (int i = 0; i < plain_txt.length(); i++) {
+            char c = plain_txt.charAt(i);
             // System.out.print(c+ " ");
             // cipher_array.get(i) = encryptDict.get(c);
             // System.out.print(encryptDict.get(c)+", ");
-            
-            cipher_arrayList.add(map.get(c));
-            System.out.print(cipher_arrayList.get(i));
+
+            cipher_txt.add(encryptMap.get(c));
+            System.out.print(cipher_txt.get(i));
 
         }
         System.out.println();
 
+        // System.out.println(encryptMap.getKey('a'));
+
+        // for (HashMap.Entry<Character, Character> entry : encryptMap.entrySet()) {
+        // if (entry.getValue().equals('a')) {
+        // System.out.println(entry.getKey());
+        // }
+        // }
+
+        HashMap<Character, Character> decryptMap = new HashMap<>();
+        char[] temp = new char[cipher_txt.size()];
+
+        // initializing decryptMap
+        for (HashMap.Entry<Character, Character> entry : encryptMap.entrySet()) {
+            // if (entry.getValue() == 'a') {
+            // System.out.println("The key for value is " + entry.getKey());
+            // break;
+            // }
+
+            char v = entry.getValue();
+            char k = entry.getKey();
+            decryptMap.put(v, k);
+        }
 
         System.out.println("\n\nDecrypting...");
         System.out.print("cipher text: ");
-        cipher_arrayList.forEach(System.out::print);
+        cipher_txt.forEach(System.out::print);
         System.out.println();
         System.out.print("plain text: ");
 
+        List<Character> decrypt_text = new ArrayList<Character>();
 
-        // for(Entry<String, Integer> entry: encryptDict.entrySet()) {
+        for (int i = 0; i < cipher_txt.size(); i++) {
+            // System.out.print(cipher_arrayList.get(i));
+            temp[i] = cipher_txt.get(i);
+            // System.out.print(c+ " ");
+            // cipher_array.get(i) = encryptDict.get(c);
+            // System.out.print(encryptDict.get(c)+", ");
 
-        //     // if give value is equal to value from entry
-        //     // print the corresponding key
-        //     if(entry.getValue() == value) {
-        //       System.out.println("The key for value " + value + " is " + entry.getKey());
-        //       break;
-        //     }
-        //   }
+            // if (entry.getValue() == 'a') {
+            //     System.out.println("The key for value is " + entry.getKey());
+            //     break;
+            // }
+            decrypt_text.add(decryptMap.get(temp[i]));
+            System.out.print(decrypt_text.get(i));
+            // System.out.print(temp[i]);
 
+        }
+        System.out.println();
 
-
+        
 
         System.out.println();
     }
