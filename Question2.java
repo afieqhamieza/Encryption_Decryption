@@ -24,7 +24,6 @@ public class Question2 {
         System.out.print("Enter value of m: ");
         int m_in = input.nextInt();
         input.nextLine();
-        // System.out.println(m_in);
         // ------- End of take input of m -------
 
         // ---------- Take input of key value ----------
@@ -34,7 +33,6 @@ public class Question2 {
         int key_arr[] = new int[key_in.length()];
         for (int i = 0; i < key_in.length(); i++) {
             key_arr[i] = Character.digit(key_in.charAt(i), 10);
-            // System.out.print(key_arr[i]+", ");
         }
         // ------- end of Take input of key value -------
 
@@ -44,7 +42,6 @@ public class Question2 {
 
         plain_text = plain_text.toLowerCase();
         int plainTxt_length = plain_text.length();
-        // System.out.println(plain_text);
         // --------- end of Take input of plain text -------
 
         // ---------- initialize encrypt map ----------
@@ -56,11 +53,8 @@ public class Question2 {
         // ---------- defining and initializing matrix ---------
         int m_col = m_in;
         int m_row = (int) Math.ceil((float) plainTxt_length / m_col);
-        // System.out.println("check");
-        char[][] matrix = new char[m_row][m_col];
 
-        // System.out.println(plainTxt_length);
-        // System.out.println("col is " + m_col + " and row is " + m_row);
+        char[][] matrix = new char[m_row][m_col];
 
         for (int i = 0; i < m_row; i++) {
             for (int j = 0; j < m_col; j++) {
@@ -79,12 +73,12 @@ public class Question2 {
         // ------- end of defining and initializing matrix ------
 
         // ---------- displaying matrix -----------
-        for (int i = 0; i < m_row; i++) {
-            for (int j = 0; j < m_col; j++) {
-                System.out.print(matrix[i][j] + " ");
-            }
-            System.out.println();
-        }
+        // for (int i = 0; i < m_row; i++) {
+        //     for (int j = 0; j < m_col; j++) {
+        //         System.out.print(matrix[i][j] + " ");
+        //     }
+        //     System.out.println();
+        // }
         // ---------- end of displaying matrix -----------
 
         // define encryptMatrix and decryptMatrix
@@ -132,11 +126,6 @@ public class Question2 {
         // ------ end of decryptMap initializing -------
 
         // ----------- decryptMatrix initializing ----------
-        int dm_col = m_col;
-        int dm_row = (int) Math.ceil((float) encrypt_text.size() / m_col);
-
-        // char[][] dMatrix = new char [m_row][m_col];
-
         for (int j = 0; j < m_col; j++) {
             int[] temp = new int[m_row];
             for (int i = 0; i < m_row; i++) {
@@ -162,7 +151,6 @@ public class Question2 {
                 if (decryptMatrix[i][j] != padding)
                     decrypt_text.add(decryptMatrix[i][j]);
             }
-
         }
 
         System.out.println("decrypting...");
