@@ -3,9 +3,6 @@ import java.util.*;
 public class Question2 {
     public static void main(String[] args) {
 
-        // define and initialize array that contains all 29 ASCII characters
-        char[] Z29 = "abcdefghijklmnopqrstuvwxyz ,.".toCharArray();
-
         // define key map
         HashMap<Integer, Integer> encryptMap = new HashMap<>();
         HashMap<Integer, Integer> decryptMap = new HashMap<>();
@@ -50,6 +47,14 @@ public class Question2 {
         }
         // ------- end of initialize encrypt map -------
 
+        // ---------- initialize decryptMap ---------
+        for (HashMap.Entry<Integer, Integer> entry : encryptMap.entrySet()) {
+            int v = entry.getValue();
+            int k = entry.getKey();
+            decryptMap.put(v, k);
+        }
+        // ------ end of decryptMap initializing -------
+
         // ---------- defining and initializing matrix ---------
         int m_col = m_in;
         int m_row = (int) Math.ceil((float) plainTxt_length / m_col);
@@ -72,15 +77,6 @@ public class Question2 {
         }
         // ------- end of defining and initializing matrix ------
 
-        // ---------- displaying matrix -----------
-        // for (int i = 0; i < m_row; i++) {
-        //     for (int j = 0; j < m_col; j++) {
-        //         System.out.print(matrix[i][j] + " ");
-        //     }
-        //     System.out.println();
-        // }
-        // ---------- end of displaying matrix -----------
-
         // define encryptMatrix and decryptMatrix
         char[][] encryptMatrix = new char[m_row][m_col];
         char[][] decryptMatrix = new char[m_row][m_col];
@@ -93,39 +89,15 @@ public class Question2 {
                 encryptMatrix[i][temp[i] - 1] = matrix[i][j];
             }
         }
-        // -------- end of encryption ------
 
-        // ---------- displaying matrix -----------
-        System.out.println("Encrypt matrix...");
-        for (int i = 0; i < m_row; i++) {
-            for (int j = 0; j < m_col; j++) {
-                System.out.print(encryptMatrix[i][j] + " ");
-            }
-            System.out.println();
-        }
-        // ---------- end of displaying matrix -----------
-
-        // ---------- displaying cipher text -----------
         for (int j = 0; j < m_col; j++) {
             for (int i = 0; i < m_row; i++) {
                 encrypt_text.add(encryptMatrix[i][j]);
             }
         }
+        // -------- end of encryption ------
 
-        for (int i = 0; i < encrypt_text.size(); i++) {
-            System.out.print(encrypt_text.get(i));
-        }
-        // ---------- end of displaying cipher text -----------
-
-        // ---------- initialize decryptMap ---------
-        for (HashMap.Entry<Integer, Integer> entry : encryptMap.entrySet()) {
-            int v = entry.getValue();
-            int k = entry.getKey();
-            decryptMap.put(v, k);
-        }
-        // ------ end of decryptMap initializing -------
-
-        // ----------- decryptMatrix initializing ----------
+        // ---------- decrypting ----------
         for (int j = 0; j < m_col; j++) {
             int[] temp = new int[m_row];
             for (int i = 0; i < m_row; i++) {
@@ -133,31 +105,41 @@ public class Question2 {
                 decryptMatrix[i][temp[i] - 1] = encryptMatrix[i][j];
             }
         }
-        // ----------- decryptMatrix initializing ----------
 
-        // ---------- displaying matrix -----------
-        System.out.println("decrypt matrix...");
-        for (int i = 0; i < m_row; i++) {
-            for (int j = 0; j < m_col; j++) {
-                System.out.print(decryptMatrix[i][j] + " ");
-            }
-            System.out.println();
-        }
-        // ---------- end of displaying matrix -----------
-
-        // ---------- decrypting ----------
         for (int i = 0; i < m_row; i++) {
             for (int j = 0; j < m_col; j++) {
                 if (decryptMatrix[i][j] != padding)
                     decrypt_text.add(decryptMatrix[i][j]);
             }
         }
+        // ------- end of decrypting -------
 
-        System.out.println("decrypting...");
+        // --------- displaying results ---------
+        System.out.println();
+        System.out.println("Entered plain text: " + plain_text);
+
+        System.out.print("Encryption: ");
+        for (int i = 0; i < encrypt_text.size(); i++) {
+            System.out.print(encrypt_text.get(i));
+        }
+
+        System.out.println();
+        System.out.println();
+
+        System.out.print("Entered Cipher text: ");
+        for (int i = 0; i < encrypt_text.size(); i++) {
+            System.out.print(encrypt_text.get(i));
+        }
+
+        System.out.print("\nDecryption: ");
         for (int i = 0; i < decrypt_text.size(); i++) {
             System.out.print(decrypt_text.get(i));
         }
-        // ------- end of decrypting -------
+
+        System.out.println();
+        System.out.println();
+
+        // ------ end of displaying results ------
 
     }
 }
