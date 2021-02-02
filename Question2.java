@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class test2 {
+public class Question2 {
     public static void main(String[] args) {
 
         // define and initialize array that contains all 29 ASCII characters
@@ -56,72 +56,41 @@ public class test2 {
         }
         // ------- end of initialize key map -------
 
-        // ---------- defining matrix ---------
+        // ---------- defining and initializing matrix ---------
         int m_col = m_in;
         int m_row = (int) Math.ceil((float) plainTxt_length / m_col);
         // System.out.println("check");
         char[][] matrix = new char[m_row][m_col];
 
-        // System.out.println(Math.ceil((float)plainTxt_length/m_col));
         System.out.println(plainTxt_length);
         System.out.println("col is " + m_col + " and row is " + m_row);
 
-        // char temp = plain_text.charAt(5);
-        // System.out.println(temp);
-        // if (new String(Z29).indexOf(temp) != -1 || temp == ' ') {
-        // System.out.println("works");
-        // }
-        // if (temp == '\0') {
-        // System.out.println("end");
-        // }
+        for (int i = 0; i < m_row; i++) {
+            for (int j = 0; j < m_col; j++) {
+                matrix[i][j] = padding;
+            }
+        }
 
-        // for (int i = 0; i < m_row; i++) {
-        //     for (int j = 0; j < m_col; j++) {
-        //         matrix[i][j] = padding;
-        //     }
-        // }
+        for (int i = 0, j = 0, k = 0; k < plainTxt_length; k++) {
+            matrix[i][j] = plain_text.charAt(k);
+            j++;
+            if (j == m_col) {
+                j = 0;
+                i++;
+            }
+        }
+        // ------- end of defining and initializing matrix ------
 
-        // for (int i = 0; i < m_row; i++) {
-        //     for (int j = 0; j < m_col; j++) {
-        //         System.out.print(matrix[i][j] + " ");
-        //     }
-        //     System.out.println();
-        // }
 
-        // for (int i = 0, k = 0; i < m_row; i++) {
-        //     // System.out.println("check");
-        //     // if (k < plainTxt_length) {
-        //     for (int j = 0; j < m_col;) {
-        //         // System.out.println("check");
-        //         // System.out.println(plain_text.charAt(k));
-        //         // System.out.println("k is " + k);
+        // ---------- displaying matrix -----------
+        for (int i = 0; i < m_row; i++) {
+            for (int j = 0; j < m_col; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+        // ---------- end of displaying matrix -----------
 
-        //         // System.out.println();
-        //         // System.out.print(plain_text.charAt(k) + ", ");
-        //         if (k < plainTxt_length) {
-        //             char c = plain_text.charAt(k);
-        //             // if (c == '\0') {
-        //             // System.out.println("inside end");
-        //             // matrix[i][j] = padding;
-        //             // // System.out.println(matrix[i][j]);
-        //             // j++;
-        //             // }
-        //             // System.out.println();
-        //             // System.out.print(c + ", ");
-        //             if (new String(Z29).indexOf(c) != -1 || c == ' ') {
-        //                 matrix[i][j] = c;
-        //                 // System.out.println("put in matrix");
-        //                 j++;
-        //             }
-        //             k++;
-        //         }
-        //     }
-
-        //     // }
-
-        // }
-        // // ------- end of defining matrix ------
-        // // System.out.println("check");
 
         // ----------- encryption ---------
         // int element_size = matrix[0].length * matrix.length;
@@ -132,9 +101,6 @@ public class test2 {
         // System.out.println();
         // }
         // -------- end of encryption ------
-
-
-        System.out.println("yho");
 
     }
 }
