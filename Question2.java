@@ -7,7 +7,8 @@ public class Question2 {
         char[] Z29 = "abcdefghijklmnopqrstuvwxyz ,.".toCharArray();
 
         // define key map
-        HashMap<Integer, Integer> keyMap = new HashMap<>();
+        HashMap<Integer, Integer> encryptMap = new HashMap<>();
+        HashMap<Integer, Integer> decryptMap = new HashMap<>();
 
         // define a list that will store the encrypted text and decrypted text
         List<Character> encrypt_text = new ArrayList<Character>();
@@ -46,11 +47,11 @@ public class Question2 {
         // System.out.println(plain_text);
         // --------- end of Take input of plain text -------
 
-        // ---------- initialize key map ----------
+        // ---------- initialize encrypt map ----------
         for (int i = 0; i < key_arr.length; i++) {
-            keyMap.put(i + 1, key_arr[i]);
+            encryptMap.put(i + 1, key_arr[i]);
         }
-        // ------- end of initialize key map -------
+        // ------- end of initialize encrypt map -------
 
         // ---------- defining and initializing matrix ---------
         int m_col = m_in;
@@ -58,8 +59,8 @@ public class Question2 {
         // System.out.println("check");
         char[][] matrix = new char[m_row][m_col];
 
-        System.out.println(plainTxt_length);
-        System.out.println("col is " + m_col + " and row is " + m_row);
+        // System.out.println(plainTxt_length);
+        // System.out.println("col is " + m_col + " and row is " + m_row);
 
         for (int i = 0; i < m_row; i++) {
             for (int j = 0; j < m_col; j++) {
@@ -78,40 +79,30 @@ public class Question2 {
         // ------- end of defining and initializing matrix ------
 
         // ---------- displaying matrix -----------
-        // for (int i = 0; i < m_row; i++) {
-        // for (int j = 0; j < m_col; j++) {
-        // System.out.print(matrix[i][j] + " ");
-        // }
-        // System.out.println();
-        // }
+        for (int i = 0; i < m_row; i++) {
+            for (int j = 0; j < m_col; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
         // ---------- end of displaying matrix -----------
 
         // define encryptMatrix and decryptMatrix
         char[][] encryptMatrix = new char[m_row][m_col];
         char[][] decryptMatrix = new char[m_row][m_col];
 
-        // for(i1=0;i1<m_row;i1++)
-        // {
-        // for(i2=0;i2<m_col;i2++)
-        // {
-        // System.out.print(op[i1][i2]+" ");
-        // }
-        // System.out.println();
-        // }
-
         // ----------- encryption ---------
-        // int element_size = matrix[0].length * matrix.length;
-
         for (int j = 0; j < m_col; j++) {
-            int[] temp = new int[m_row]; // should be just row size
+            int[] temp = new int[m_row];
             for (int i = 0; i < m_row; i++) {
-                temp[i] = keyMap.get(j + 1);
+                temp[i] = encryptMap.get(j + 1);
                 encryptMatrix[i][temp[i] - 1] = matrix[i][j];
             }
         }
         // -------- end of encryption ------
 
         // ---------- displaying matrix -----------
+        System.out.println("Encrypt matrix...");
         for (int i = 0; i < m_row; i++) {
             for (int j = 0; j < m_col; j++) {
                 System.out.print(encryptMatrix[i][j] + " ");
@@ -126,11 +117,59 @@ public class Question2 {
                 encrypt_text.add(encryptMatrix[i][j]);
             }
         }
-        // ---------- end of displaying cipher text -----------
 
-        for (int i = 0; i < plainTxt_length; i++) {
+        for (int i = 0; i < encrypt_text.size(); i++) {
             System.out.print(encrypt_text.get(i));
         }
+        // ---------- end of displaying cipher text -----------
+
+        // ---------- initialize decryptMap ---------
+        for (HashMap.Entry<Integer, Integer> entry : encryptMap.entrySet()) {
+            int v = entry.getValue();
+            int k = entry.getKey();
+            decryptMap.put(v, k);
+        }
+        // ------ end of decryptMap initializing -------
+
+        // ----------- decryptMatrix initializing ----------
+        int dm_col = m_col;
+        int dm_row = (int) Math.ceil((float) encrypt_text.size() / m_col);
+
+        // char[][] dMatrix = new char [m_row][m_col];
+
+        for (int j = 0; j < m_col; j++) {
+            int[] temp = new int[m_row];
+            for (int i = 0; i < m_row; i++) {
+                temp[i] = decryptMap.get(j + 1);
+                decryptMatrix[i][temp[i] - 1] = encryptMatrix[i][j];
+            }
+        }
+        // ----------- decryptMatrix initializing ----------
+
+        // ---------- displaying matrix -----------
+        System.out.println("decrypt matrix...");
+        for (int i = 0; i < m_row; i++) {
+            for (int j = 0; j < m_col; j++) {
+                System.out.print(decryptMatrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+        // ---------- end of displaying matrix -----------
+
+        // ---------- decrypting ----------
+        for (int i = 0; i < m_row; i++) {
+            for (int j = 0; j < m_col; j++) {
+                if (decryptMatrix[i][j] != padding)
+                    decrypt_text.add(decryptMatrix[i][j]);
+            }
+
+        }
+
+        System.out.println("decrypting...");
+        for (int i = 0; i < decrypt_text.size(); i++) {
+            System.out.print(decrypt_text.get(i));
+        }
+        // ------- end of decrypting -------
 
     }
 }
