@@ -4,7 +4,7 @@ public class Question1 {
     public static void main(String[] args) {
 
         // define and initialize plain text
-        String plain_txt = "I am studying Data Encryption";
+        String plain_txt = "meet me at the rooftop";
         plain_txt = plain_txt.toLowerCase();
 
         // define and initialize array that contains all 29 ASCII characters
@@ -72,5 +72,6 @@ public class Question1 {
         // ------ end of decryption ------
 
         System.out.println();
+
     }
 }
